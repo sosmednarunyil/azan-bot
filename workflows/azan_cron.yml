@@ -1,0 +1,27 @@
+name: Check Waktu Salat Azan
+
+on:
+  schedule:
+    # Jalan otomatis setiap 5 menit (Cron UTC)
+    - cron: '*/5 * * * *'
+  workflow_dispatch: # Agar bisa dites jalan manual via tombol kapan saja
+
+jobs:
+  check-azan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install requests pytz
+
+      - name: Run Script Cek Salat
+        env:
+          MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
+        run: python check_sholat.py
