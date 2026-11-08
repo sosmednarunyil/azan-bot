@@ -25,9 +25,3 @@ jobs:
         env:
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
         run: python check_sholat.py
-
-        # Kode tes paksa kirim sinyal
-          os, requests
-          = os.environ.get("MAKE_WEBHOOK_URL")
-          url:
-          requests.post(url, json={"salat": "Subuh", "tipe": "azanshubuh", "volume": 5})
